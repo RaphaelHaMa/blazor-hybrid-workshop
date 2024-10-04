@@ -33,4 +33,10 @@ public class MonkeyService
 
         return monkeysList;
     }
+
+    public List<Monkey> AddMonkey(Monkey monkey)
+    {
+        monkeysList.Add(monkey);
+        return monkeysList;
+    }
 }
