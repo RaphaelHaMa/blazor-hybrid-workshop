@@ -39,4 +39,14 @@ public class MonkeyService
         monkeysList.Add(monkey);
         return monkeysList;
     }
+
+    public Monkey FindMonkeyByName(string name)
+    {
+        var monkey = monkeysList.FirstOrDefault(m => m.Name == name);
+
+        if (monkey is null) throw new Exception("Monkey not found");
+
+        return monkey;
+    }
+
 }
