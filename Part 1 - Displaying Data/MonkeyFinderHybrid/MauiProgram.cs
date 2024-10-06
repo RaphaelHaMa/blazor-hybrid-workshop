@@ -20,6 +20,9 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MonkeyService>();
 
+		builder.Services.AddSingleton<IGeolocation>(sp => Geolocation.Default);
+		builder.Services.AddSingleton<IMap>(sp => Map.Default);
+
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();

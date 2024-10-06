@@ -1,10 +1,8 @@
 ﻿@page "/"
-@inject MonkeyService MonkeyService
-@inject IDialogService dialogService
-@inject NavigationManager NavManager
 
 <div>
     <button class="button-yellow" @onclick="AddMonkey">Add New Monkey</button>
+    <button class="button-yellow" @onclick="FindMonkey">Find Closest Monkey</button>
     
     @if(monkeys is null)
     {
@@ -26,38 +24,3 @@
         </ul>
     }
 </div>
-
-@code {
-    private List<Monkey> monkeys = new();
-
-    private Monkey DialogData { get; set; } = new();
-
-    protected override async Task OnInitializedAsync()
-    {        
-        monkeys = await MonkeyService.GetMonkeysAsync();
-    }
-
-    private async Task AddMonkey()
-    {
-        var data = new Monkey();
-        var dialog = await dialogService.ShowDialogAsync<SimpleCustomizedDialog>(data, new DialogParameters()
-        {
-            Title = $"Add a New Monkey",
-            PreventDismissOnOverlayClick = true,
-            PreventScroll = true
-        });
-
-        var result = await dialog.Result;
-        if (!result.Cancelled && result.Data is not null)
-        {
-            DialogData = (Monkey)result.Data;
-            monkeys = MonkeyService.AddMonkey(DialogData);
-             
-        }
-    }
-
-    private void GoToDetails(Monkey monkey)
-    {
-        NavManager.NavigateTo($"details/{monkey.Name}");
-    }
-}

@@ -13,7 +13,7 @@
         <h2 class="detailsimage-title">@monkey.Name</h2>
     </div>
     <div class="detailscard-body">
-        <button class="detailsbutton-yellow">Show on Map</button>
+        <button class="detailsbutton-yellow" @onclick="OpenMap">Show on Map</button>
         <button class="detailsbutton-yellow" @onclick="AddRating">Rate This Monkey!</button>
         <p class="detailsdescription">@monkey.Details</p>
         <p class="detailslocation"><strong>Location:</strong> @monkey.Location</p>
@@ -23,8 +23,12 @@
 
 @code {
     [Parameter]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
+
     private Monkey monkey { get; set; } = new();
+
+    [Inject]
+    private IMap Map { get; set; } = default!;
 
     protected override void OnInitialized()
     {
@@ -39,5 +43,26 @@
     private void AddRating()
     {
         ((Application)app).Windows[0].Page!.Navigation.PushAsync(new MonkeyRatingPage());
+    }
+
+    private async Task OpenMap()
+    {
+        try
+        {
+            if (Map == null)
+            {
+                throw new Exception("Map service is not available.");
+            }
+
+            await Map.OpenAsync(monkey.Latitude, monkey.Longitude, new MapLaunchOptions
+            {
+                Name = monkey.Name,
+                NavigationMode = NavigationMode.None
+            });
+        }
+        catch (Exception ex)
+        {
+            await ((Application)app).Windows[0].Page!.DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 }
