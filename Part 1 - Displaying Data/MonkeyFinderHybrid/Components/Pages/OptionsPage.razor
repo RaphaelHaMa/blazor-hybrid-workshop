@@ -3,4 +3,14 @@
 <h3>Options</h3>
 
 <button class="button-yellow" @onclick="CheckInternet">Check Internet</button>
+<FluentMenuButton Text="Select theme color" OnMenuChanged="HandleOnMenuChanged">
+    <FluentMenuItem Id="1">Light</FluentMenuItem>
+    <FluentMenuItem Id="2">Dark</FluentMenuItem>
+    <FluentMenuItem Id="3">System</FluentMenuItem>
+</FluentMenuButton>
+
+
+<p class="optionstheme">Selected Theme: @selectedTheme</p>
+
+<FluentDesignTheme @bind-Mode="@Mode" CustomColor="#FFC107" StorageName="mytheme" />
 

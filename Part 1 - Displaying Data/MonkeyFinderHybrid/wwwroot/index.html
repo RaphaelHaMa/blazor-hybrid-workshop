@@ -4,16 +4,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>MonkeyFinderHybrid</title>
     <base href="/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
+    <link id="light-mode" rel="stylesheet" href="css/app.css" />
+    <link id="dark-mode" rel="stylesheet" href="css/darkMode.css" disabled/>
     <link rel="stylesheet" href="MonkeyFinderHybrid.styles.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 
 <body>
+    <fluent-design-theme mode="light" primary-color="#FFC107" />
+    <script>
+        function setTheme(mode) {
+            const lightMode = document.getElementById('light-mode');
+            const darkMode = document.getElementById('dark-mode');
+
+            if (mode === 'dark') {
+                lightMode.disabled = true;
+                darkMode.disabled = false;
+            } else {
+                lightMode.disabled = false;
+                darkMode.disabled = true;
+            }
+        }
+    </script>
+
     <div class="status-bar-safe-area"></div>
 
     <div id="app">Loading...</div>
