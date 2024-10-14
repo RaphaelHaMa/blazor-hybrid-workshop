@@ -1,0 +1,10 @@
+﻿<button class="button-blue" @onclick="Callback">@Caption</button>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string Caption { get; set; } = string.Empty;    
+
+    [Parameter]
+    public EventCallback Callback { get; set; }
+}

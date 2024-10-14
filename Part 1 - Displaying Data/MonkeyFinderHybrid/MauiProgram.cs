@@ -25,6 +25,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IGeolocation>(sp => Geolocation.Default);
 		builder.Services.AddSingleton<IMap>(sp => Map.Default);
 
+		builder.Services.AddSingleton<RatingState>();
+
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();

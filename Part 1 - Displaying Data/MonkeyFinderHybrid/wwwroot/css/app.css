@@ -172,6 +172,34 @@ textarea {
     margin-bottom: 10px;
 }
 
+.button-blue {
+    background-color: #ffffff;
+    /* White background */
+    color: dodgerblue;
+    /* Yellow text */
+    border: 2px solid dodgerblue;
+    /* Yellow border */
+    padding: 10px;
+    /* Padding inside the button */
+    font-size: 16px;
+    /* Font size */
+    font-weight: bold;
+    /* Bold text */
+    text-align: center;
+    /* Center the text */
+    text-decoration: none;
+    /* Remove underline from links */
+    display: inline-block;
+    /* Make it an inline-block element */
+    border-radius: 25px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transition for background and text color */
+    margin-bottom: 10px;
+}
+
 .detailsbody {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;

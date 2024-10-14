@@ -1,6 +1,8 @@
 ﻿@page "/details/{name}"
+
 @inject NavigationManager NavManager
 @inject MonkeyService MonkeyService
+@inject RatingState ratingState
 
 <div>
     <div class="detailscard-header">
@@ -18,6 +20,7 @@
         <p class="detailsdescription">@monkey.Details</p>
         <p class="detailslocation"><strong>Location:</strong> @monkey.Location</p>
         <p class="detailspopulation"><strong>Population:</strong> @monkey.Population</p>
+        <p class="detailsrating"><strong>Rating:</strong> @ratingState.GetRating(monkey)</p>
     </div>
 </div>
 
@@ -33,6 +36,10 @@
     protected override void OnInitialized()
     {
         monkey = MonkeyService.FindMonkeyByName(Name);
+        ratingState.RatingChanged += (_,_) =>
+        {
+            _ = InvokeAsync(() => StateHasChanged());
+        };
     }
 
     private void CloseWindow()
@@ -42,7 +49,7 @@
 
     private void AddRating()
     {
-        ((Application)app).Windows[0].Page!.Navigation.PushAsync(new MonkeyRatingPage());
+        ((Application)app).Windows[0].Page!.Navigation.PushAsync(new MonkeyRatingPage(monkey, ratingState));
     }
 
     private async Task OpenMap()

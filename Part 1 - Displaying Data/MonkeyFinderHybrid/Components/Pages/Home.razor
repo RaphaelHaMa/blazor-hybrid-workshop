@@ -1,8 +1,8 @@
 ﻿@page "/"
 
 <div>
-    <button class="button-yellow" @onclick="AddMonkey">Add New Monkey</button>
-    <button class="button-yellow" @onclick="FindMonkey">Find Closest Monkey</button>
+    <MyButton Caption="Add New Monkey" Callback="AddMonkey"/>
+    <MyButton Caption="Find Closest Monkey" Callback="FindMonkey" />
     
     @if(monkeys is null)
     {
